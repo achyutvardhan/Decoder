@@ -76,6 +76,7 @@ int deletion(struct queue *line)
         printf("queue is empty cannot deleted");
         return -1;
     }
+    int del = line->arr[0];
     while (line!=NULL)
     {
       for(int i = 0;i<line->size;i++ ){
@@ -91,7 +92,8 @@ int deletion(struct queue *line)
       }
       
     }
-    
+
+    return del;
 }
 
 void traverse(struct queue *line)
