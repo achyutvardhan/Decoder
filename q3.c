@@ -7,6 +7,7 @@ struct queue
     int size;
     int f;
     int r;
+    struct queue * prev;
     struct queue *next;
 };
 
@@ -63,6 +64,11 @@ void insertion(struct queue *line, int value)
     line->arr[++line->r] = value;
 }
 
+void insert(struct queue *line , int val){
+
+  line->arr[line->r]  =  val;
+}
+
 int deletion(struct queue *line)
 {
     if (isEmpty(line))
@@ -70,7 +76,22 @@ int deletion(struct queue *line)
         printf("queue is empty cannot deleted");
         return -1;
     }
-    return line->arr[line->f++];
+    while (line!=NULL)
+    {
+      for(int i = 0;i<line->size;i++ ){
+           line->arr[i] = line->arr[i+1];
+      }
+      line = line->next;
+      if (line!=NULL)
+      {
+      int temp_val = line->arr[0];
+      insert(line->prev,temp_val);
+      }else{
+        line->prev->r--;
+      }
+      
+    }
+    
 }
 
 void traverse(struct queue *line)
@@ -104,6 +125,9 @@ int main()
     line1->next = line2;
     line2->next = line3;
     line3->next = NULL;
+    line1->prev = NULL;
+    line2->prev = line1;
+    line3->prev = line2;
     line1->f = line2->f = line3->f = -1;
     line1->r = line2->r = line3->r = -1;
     int val;
