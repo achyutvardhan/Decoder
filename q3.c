@@ -29,6 +29,7 @@ int isFull(struct queue *line)
     else
         return 0;
 }
+
 int isEmpty(struct queue *line)
 {
     int count = 0;
@@ -48,18 +49,7 @@ int isEmpty(struct queue *line)
         return 0;
 }
 
-int isEmpty_delete(struct queue *line)
-{
-    if (line->r == -1)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
+//-------------------------------------------------------------INSERTION----------------------------------------------------------------------------------------
 void insertion(struct queue *line, int value)
 {
 
@@ -74,6 +64,18 @@ void insertion(struct queue *line, int value)
         line = line->next;
     }
     line->arr[++line->r] = value;
+}
+// ----------------------------------DELETION-------------------------------------------------------------------
+int isEmpty_delete(struct queue *line)
+{
+    if (line->r == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void insert(struct queue *line, int val)
@@ -90,7 +92,6 @@ int deletion(struct queue *line)
     }
     else if (isEmpty_delete(line))
     {
-        printf("queue is empty cannot deleted");
         return -1;
     }
     else
@@ -109,10 +110,10 @@ int deletion(struct queue *line)
             if (line->next == NULL || check == -1)
             {
 
-                printf("checked");
-                printf("%d ", line->r);
+                // printf("checked");
+                // printf("%d ", line->r);
                 line->r--;
-                printf("%d ", line->r);
+                // printf("%d ", line->r);
             }
             return 1;
         }
@@ -124,7 +125,7 @@ int deletion(struct queue *line)
         }
     }
 }
-
+//------------------------------------------------------Traverse-------------------------------------------------------------------------
 void traverse(struct queue *line)
 {
     while (line != NULL)
@@ -162,10 +163,10 @@ int main()
     line1->f = line2->f = line3->f = -1;
     line1->r = line2->r = line3->r = -1;
     int val;
-    printf("enter your choice \n 1. insert \n 2. delete \n 3. traverse \n 4. Exit");
     int a;
     while (a != 4)
     {
+        printf("\nenter your choice \n 1. insert \n 2. delete \n 3. traverse \n 4. Exit\n");
         scanf("%d", &a);
         switch (a)
         {
