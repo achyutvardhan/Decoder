@@ -7,7 +7,7 @@ struct queue
     int size;
     int f;
     int r;
-    struct queue * prev;
+    struct queue *prev;
     struct queue *next;
 };
 
@@ -48,6 +48,18 @@ int isEmpty(struct queue *line)
         return 0;
 }
 
+int isEmpty_delete(struct queue *line)
+{
+    if (line->r == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 void insertion(struct queue *line, int value)
 {
 
@@ -64,36 +76,53 @@ void insertion(struct queue *line, int value)
     line->arr[++line->r] = value;
 }
 
-void insert(struct queue *line , int val){
+void insert(struct queue *line, int val)
+{
 
-  line->arr[line->r]  =  val;
+    line->arr[line->r] = val;
 }
 
 int deletion(struct queue *line)
 {
-    if (isEmpty(line))
+    if (line == NULL)
+    {
+        return 0;
+    }
+    else if (isEmpty_delete(line))
     {
         printf("queue is empty cannot deleted");
         return -1;
     }
-    int del = line->arr[0];
-    while (line!=NULL)
+    else
     {
-      for(int i = 0;i<line->size;i++ ){
-           line->arr[i] = line->arr[i+1];
-      }
-      line = line->next;
-      if (line!=NULL)
-      {
-      int temp_val = line->arr[0];
-      insert(line->prev,temp_val);
-      }else{
-        line->prev->r--;
-      }
-      
-    }
+        int del = line->arr[0];
 
-    return del;
+        for (int i = 0; i < line->size - 1; i++)
+        {
+
+            line->arr[i] = line->arr[i + 1];
+        }
+        int check = deletion(line->next);
+        if (line->prev != NULL)
+        {
+            insert(line->prev, del);
+            if (line->next == NULL || check == -1)
+            {
+
+                printf("checked");
+                printf("%d ", line->r);
+                line->r--;
+                printf("%d ", line->r);
+            }
+            return 1;
+        }
+        else
+        {
+            if (check == -1)
+                line->r--;
+            return del;
+        }
+    }
 }
 
 void traverse(struct queue *line)
@@ -146,7 +175,7 @@ int main()
             insertion(line1, val);
             break;
         case 2:
-            printf("person exited %d", deletion(line1));
+            printf("person exited %d \n", deletion(line1));
             break;
         case 3:
             traverse(line1);
