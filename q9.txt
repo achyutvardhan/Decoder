@@ -1,0 +1,20 @@
+Think about the distances between the following four cities: 0, 1, 2, and 3. Then, examine how to distribute two ATMs among these cities so that the maximum distance from a city to an ATM is kept to a minimum.
+
+Polynomial-time exists. The greedy approximate algorithm, which never yields a result that is poorer than twice the ideal result. Only when the distances between cities are consistent does the greedy solution work. Triangle Unfairness
+
+The 2-Approximate Greedy Algorithm: 
+
+1. Choose the first center arbitrarily. 
+2. Choose remaining k-1 centers using the following criteria. 
+ Let the already selected centres be c1, c2, c3,... ci. Pick the city that is farthest from the centres that have already been chosen, that is, the point p that has the following value as the maximum Min. [dist(p, c1), dist(p, c2, c3),.... dist(p, ci)].
+
+For 3 and above :
+
+ Let the first arbitrarily picked vertex be 0. 
+The next vertex is 1 because 1 is the farthest vertex from 0. 
+Remaining cities are 2 and 3. Calculate their distances from already selected centers (0 and 1). The greedy algorithm basically calculates the following values. 
+Minimum of all distanced from 2 to already considered centers 
+Min[dist(2, 0), dist(2, 1)] = Min[7, 8] = 7 
+Minimum of all distanced from 3 to already considered centers 
+Min[dist(3, 0), dist(3, 1)] = Min[6, 5] = 5 
+After computing the above values, city 2 is picked as the value corresponding to 2 is maximum. 
